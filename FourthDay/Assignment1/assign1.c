@@ -30,6 +30,8 @@ int main(){
     sumOfDigit(578);
     extern void naturalSum(int);
     naturalSum(5);
+
+    
     return 0;
 }
 #include"toCheckAlphabets.c"
