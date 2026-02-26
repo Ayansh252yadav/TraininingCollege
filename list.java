@@ -14,6 +14,6 @@ public class list{
         if(head==null){
             return newNode;
         }
-        
+        g
     }
 }
