@@ -1,19 +1,8 @@
 public class list{
-    static class Node{
-        int data;
-        int next;
-        Node(int data){
-            this.data=data;
-            this.next=null;
-        }
+   public static void main(String args[]){
+    int n=args.length();
+    for(int i=0;i<n;i++){
+        System.out.println(args[i]+" ");
     }
-    static Node head;
-    static Node tail;
-    public static Node insertBegin(int data){
-        Node newNode=new Node(data);
-        if(head==null){
-            return newNode;
-        }
-        g
-    }
+   }
 }
