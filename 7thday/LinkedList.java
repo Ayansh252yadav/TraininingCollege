@@ -16,22 +16,25 @@ public class LinkedList{
 
     public static void insertFirst(int data){
         Node newNode=new Node(data);
-        count++;
+        
      if(head==null){
         head=tail=newNode;
         return;
      }
+     count++;
      newNode.next=head;
      head=newNode;
     }
 
 //add last;
 public static void insertLast(int data){
-    count++;
+    
     Node newNode=new Node(data);
-    if(tail==null){
+    if(head==null){
         head=tail=newNode;
+        return;
     }
+    count++;
     tail.next=newNode;
     tail=newNode;
 }
@@ -39,17 +42,100 @@ public static void insertLast(int data){
 //insert at any position
 
 public static void insertAtPos(int data,int pos){
-    Node temp=head;
-    count++;
+    
+    
+    if(pos>=count || pos<0){
+      return;
+    }
+    if(pos == 0){
+        insertFirst(data);
+        return;
+    }
     Node newNode=new Node(data);
+    Node temp=head;
     for(int i=0;i<pos-1;i++){
         temp=temp.next;
     }
+    count++;
     newNode.next=temp.next;
     temp.next=newNode;
     
 }
 
+
+//add before node
+public static void addBeNode(int data,int val){
+
+      if(head == null){
+        return;
+    }
+   
+    if(head.data==val){
+        insertFirst(data);
+        return;
+    }
+    Node newNode=new Node(data);
+    Node temp=head;
+    Node prev=null;
+    while (temp!=null &&temp.data!=val) {
+        prev=temp;
+        temp=temp.next;
+    }
+    if(temp == null){
+        System.out.println("Value not found");
+        return;
+    }
+     count++;
+    prev.next=newNode;
+    newNode.next=temp;
+}
+
+//add After node
+public static void addAfNode(int data,int val){
+
+  if(head==null){
+    return;
+  }
+    Node newNode=new Node(data);
+    
+    Node temp=head;
+    while(temp!=null&&temp.data!=val){
+        temp=temp.next;
+    }
+     if(temp == null){
+        System.out.println("Value not found");
+        return;
+    }
+    Node prev=temp.next;
+    temp.next=newNode;
+    newNode.next=prev;
+    count++;
+}
+
+//add node before specified node
+public static void addNode(int data ,Node node){
+    Node newNode=new Node(data);
+    count++;
+    if(head==null){
+        return;
+    }
+    if(head.data==node.data){
+       insertFirst(data);
+       return;
+    }
+    Node temp=head;
+    Node prev=null;
+    while(temp!=null &&temp.data!=node.data){
+       prev=temp;
+       temp=temp.next;
+    }
+    if(temp == null){
+        System.out.println("Node not found");
+        return;
+    }
+    prev.next=newNode;
+    newNode.next=temp;
+}
 //delete first
  public static Node deleteFirst(){
     if(count!=0){
@@ -66,11 +152,17 @@ public static void insertAtPos(int data,int pos){
 //delete last
 
 public static Node deleteLast(){
-    if(count!=0){
-        count--;
-    }
+   
     if(head==null){
         return null;
+    }
+     if(count!=0){
+        count--;
+    }
+     if(head.next == null){
+        Node temp = head;
+        head = null;
+        return temp;
     }
     Node temp=head;
     Node prev=null;
@@ -84,22 +176,24 @@ public static Node deleteLast(){
 }
 
 //delete at position
-public static Node deleteAtPos(int pos){
-  if(count!=0){
-        count--;
+public static void deleteAtPos(int pos){
+ 
+    if(head == null || pos < 0 || pos >= count){
+        return;
     }
-    if(head==null){
-        return null;
+    
+    if(pos==0){
+        deleteFirst();
+        return;
     }
     Node temp=head;
-    Node del=null;
+    
     for(int i=0;i<pos-1;i++){
         temp=temp.next;
     }
-   if(temp.next.next!=null){
-    temp=temp.next.next;
-   }
-    return head;
+   temp.next = temp.next.next;
+
+    count--;
 }
 
 //update record
@@ -125,6 +219,22 @@ public static void updateList(int currVal,int upVal){
         System.out.print("null");
     }
 
+    public static void reverseList(){
+        if(head==null){
+            return;
+        }
+        Node prev=null;
+        Node curr=head;
+        Node next;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        head=prev;
+    }
+
     public static void search(int item){
         Node temp=head;
         if (head==null){
@@ -142,62 +252,102 @@ public static void updateList(int currVal,int upVal){
  System.out.printf("\nelement does not exist");
     }
     public static void main(String []args){
-        System.out.println("======LinkedList created=========");
-      insertFirst(4);
-      insertFirst(3);
-      insertFirst(2);
-      insertFirst(1);
-      insertLast(5);
-      insertAtPos(6,2);
-      printList();
-      System.out.println();
-      updateList(6,10);
-    //   search(10);
-    //   deleteAtPos(0);
-    //   deleteAtPos(0);
-    //   System.out.println(count);
-    //   search(4);
-      printList();
-    // Scanner sc=new Scanner(System.in);
-    // int n,m,pos;
-    //   do{
-    //     System.out.println();
-    //     System.out.println("1 insert at first ");
-    //     System.out.println("2. Display List");
-    //     System.out.println("3. insert at Last");
-    //     System.out.println("4. insert at any pos");
-    //     System.out.println("5. delete first");
-    //     System.out.println("6.delete last");
-    //     System.out.println("Enter your choice");
-    //      n=sc.nextInt();
-    //     switch(n){
-    //         case 1:
-    //             System.out.println("Enter value: ");
-    //              m=sc.nextInt();
-    //             insertFirst(m);
-    //             break;
-    //         case 2:
-    //             printList();
-    //             break;
-    //         case 3:
-    //             System.out.println("Enter value: ");
-    //             System.out.println("Enter pos: ");
-    //              m=sc.nextInt();
-    //             insertLast(m);
-    //             break;
-    //         case 4:
-    //             System.out.println("Enter value: ");
-    //              m=sc.nextInt();
-    //              pos=sc.nextInt();
-    //             insertAtPos(m,pos);
-    //             break;
-    //         case 5:
-    //             deleteFirst();
-    //             break;
-    //         case 6:
-    //             deleteLast();
-    //             break;
-    //     }
-    //   }while(n!=0);
+    System.out.println("======LinkedList created=========");
+      
+    Scanner sc=new Scanner(System.in);
+    int n,search,pos,insert,data,delete;
+      do{
+        System.out.println();
+        System.out.println("1 INSERT  ");
+        System.out.println("2.DELETE LIST OR LIST ITEM");
+        System.out.println("3.SEARCH LIST ITEM");
+        System.out.println("4.UPDATE LIST ITEM");
+        System.out.println("5. DISPLAY LIST");
+        System.out.println("ENTER YOUR CHOICE AND PRESS 0 TO EXIT");
+         n=sc.nextInt();
+        switch(n){
+            case 1:
+                System.out.println("1.INSERT ITEM FIRST");
+                System.out.println("2. INSERT ITEM AT LAST");
+                System.out.println("3. INSERT ITEM AT ANY POS");
+                System.out.println("4. INSERT ITEM AFTER SPECIFIED LIST VALUE");
+                System.out.println("5 INSERT ITEM BEFORE SPECIFIED LIST VALUE");
+                System.out.println("6.INSERT ITEM AFTER SPECIFIED NODE");
+                insert=sc.nextInt();
+                switch(insert){
+                     case 1:
+                        System.out.println("Enter data to insert");
+                        data=sc.nextInt();
+                        insertFirst(data);
+                        break;
+                    case 2:
+                        System.out.println("Enter data to insert");
+                        data=sc.nextInt();
+                        insertLast(data);
+                        break;
+                    case 3:
+                        System.out.println("Enter data and position to insert");
+                        data=sc.nextInt();
+                        pos=sc.nextInt();
+                        insertAtPos(data, pos);
+                        break;
+                    case 4:
+                        System.out.println("Enter data ad value to insert");
+                        data=sc.nextInt();
+                        int val=sc.nextInt();
+                        addAfNode(data, val);
+                        break;
+                    case 5:
+                        System.out.println("Enter data and value to insert");
+                        data=sc.nextInt();
+                         int val1=sc.nextInt();
+                        addBeNode(data, val1);
+                        break;
+                    default:
+                        System.err.println("your entered some incorrect data");
+                        break;
+                }
+                 break;
+            case 2:
+                System.out.println("1.DELETE FIRST ITEM OF LIST");
+                System.out.println("2.DELETE LAST ITEM OF LIST");
+                System.out.println("3.DELETE AT ANY SPECIFIED POSTION");
+                delete=sc.nextInt();
+                switch (delete) {
+                    case 1:
+                        deleteFirst();
+                        break;
+                    case 2:
+                        deleteLast();
+                        break;
+                    case 3:
+                        System.out.println("enter the postion to delete");
+                        pos=sc.nextInt();
+                        deleteAtPos(pos);
+                        break;
+                    default:
+                        System.out.println("ENTER VALID NUMBER");
+                        break;
+                }
+                break;
+            case 3:
+                System.out.println("enter nuber to search in list");
+                search=sc.nextInt();
+                search(search);
+                break;
+            case 4:
+                System.out.println("enter to current data and updated value to update list item");
+                data=sc.nextInt();
+                int update=sc.nextInt();
+                updateList(data,update);
+                break;
+            case 5:
+                printList();
+                break;
+            default:
+                System.out.println("SELECT CORRECT CHOICES AND PRESS 0 TO EXIT");
+                break;
+        }
+      }while(n!=0);
     }
 }
