@@ -17,5 +17,6 @@ public class FrequencyOfCharacgter {
         System.out.println("Enter string");
         String str=sc.nextLine();
         System.out.println(Arrays.toString(frequency(str)));
+        sc.close();
     }
 }

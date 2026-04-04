@@ -1,4 +1,4 @@
-public class TreeBuild{
+public class Traversal{
     static class TreeNode{
         int data;
         TreeNode left;
@@ -45,23 +45,20 @@ public class TreeBuild{
     System.out.print(root.data+" ");
    }
    public static TreeNode newNode(int data){
-    TreeNode node=new TreeNode(data);
+    TreeNode node=newNode(data);
     return node;
    }
     public static void main(String[] args) {
     //  char []arr={'A','B','$','$','C','$','D','$','$'};
-    TreeNode root =newNode(10);
-     root.left=newNode(20);
-     root.right=newNode(30);
-     root.left.left=newNode(40);
+    TreeNode root =new TreeNode(10);
+     root.left=new TreeNode(20);
+     root.right=new TreeNode(30);
+     root.left.left=new TreeNode(40);
      System.out.println("Tree is created");
      System.out.println("Inorder");
      inOrder(root);
-     System.out.println();
      System.out.println("preorder");
-     
      preOrder(root);
-     System.out.println();
 System.out.println("Postorder");
 postOrder(root);
     //  TreeNode root=buildTree(arr);

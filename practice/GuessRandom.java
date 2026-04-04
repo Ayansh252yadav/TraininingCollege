@@ -23,5 +23,6 @@ public class GuessRandom {
             }
             count++;
         }
+        sc.close();
     }
 }

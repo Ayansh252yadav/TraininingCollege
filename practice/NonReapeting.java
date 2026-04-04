@@ -1,5 +1,4 @@
-import java.util.HashSet;
-import java.util.Scanner;
+
 import java.util.*;
 public class NonReapeting {
     public static String nonRepeating(String str){
@@ -24,5 +23,6 @@ public class NonReapeting {
         System.out.println("Enter string");
         String str=sc.nextLine();
         System.out.println(nonRepeating(str));
+        sc.close();
     }
 }

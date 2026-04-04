@@ -1,18 +1,19 @@
-public class TreeBuild{
+public class GivenTree {
+    
     static class TreeNode{
-        int data;
+        char data;
         TreeNode left;
         TreeNode right;
-        TreeNode(int data){
+        TreeNode(char data){
             this.data=data;
             this.left=null;
             this.right=null;
         }
     }
     static int idx=-1;
-    public static TreeNode buildTree(int []arr){
+    public static TreeNode buildTree(char []arr){
         idx++;
-        if(arr[idx]==-1){
+        if(arr[idx]=='$'){
             return null;
         }
         TreeNode root=new TreeNode(arr[idx]);
@@ -44,27 +45,21 @@ public class TreeBuild{
     postOrder(root.right);
     System.out.print(root.data+" ");
    }
-   public static TreeNode newNode(int data){
-    TreeNode node=new TreeNode(data);
-    return node;
-   }
+//    public static TreeNode newNode(int data){
+//     TreeNode node=new TreeNode(data);
+//     return node;
+//    }
     public static void main(String[] args) {
-    //  char []arr={'A','B','$','$','C','$','D','$','$'};
-    TreeNode root =newNode(10);
-     root.left=newNode(20);
-     root.right=newNode(30);
-     root.left.left=newNode(40);
-     System.out.println("Tree is created");
+     char []arr={'A','B','D','$','E','$','$','$','C','M','$','$','N','P','$','$','$'};
+   
+     TreeNode root=buildTree(arr);
      System.out.println("Inorder");
      inOrder(root);
      System.out.println();
-     System.out.println("preorder");
-     
+     System.out.println("PreOrder");
      preOrder(root);
      System.out.println();
-System.out.println("Postorder");
-postOrder(root);
-    //  TreeNode root=buildTree(arr);
-    //  inOrder(root);
+     System.out.println("postOrder");
+     postOrder(root);
     }
 }
